@@ -13,7 +13,7 @@ from .tiscale_client import TiScaleClient
 log = logging.getLogger(__name__)
 
 class ReversingLabsTiScaleProvider(BinaryAnalysisProvider):
-    def __init__(self, name, username, password, base_url, log_level, submit_full_binaries):
+    def __init__(self, name, api_token, base_url, log_level, submit_full_binaries):
         super(ReversingLabsTiScaleProvider, self).__init__(name)
 
         session = Session()
@@ -31,8 +31,7 @@ class ReversingLabsTiScaleProvider(BinaryAnalysisProvider):
 
         self.tiscale_client = TiScaleClient(session=session,
                                             base_url=self.base_url,
-                                            username=username,
-                                            password=password,
+                                            api_token=api_token,
                                             log_level=self.log_level
                                             )
 
@@ -94,8 +93,7 @@ class ReversingLabsTiScaleConnector(DetonationDaemon):
 
     def get_provider(self):
         tiscale_provider = ReversingLabsTiScaleProvider(name=self.name,
-                                                        username='',
-                                                        password='',
+                                                        api_token=self.tiscale_api_token,
                                                         base_url=self.tiscale_base_url,
                                                         log_level=self.log_level,
                                                         submit_full_binaries=self.submit_full_binaries

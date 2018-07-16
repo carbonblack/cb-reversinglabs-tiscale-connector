@@ -7,16 +7,12 @@ log = logging.getLogger(__name__)
 
 
 class TiScaleClient(object):
-    def __init__(self, session, base_url, username, password, log_level):
+    def __init__(self, session, base_url, api_token, log_level):
 
         self.session = session
         self.base_url = base_url
-        self.username = username
-        self.password = password
+        self.api_token = api_token
         self.log_level = log_level
-
-        log.info("Base url: {}".format(type(base_url)))
-        log.info("self base_url: {}".format(type(self.base_url)))
 
         if log_level:
             log.setLevel(logging.DEBUG)
@@ -34,14 +30,18 @@ class TiScaleClient(object):
 
         request_url = urljoin(self.base_url, upload_url)
 
+        log.error('request url: {}'.format(request_url))
         file_name = None
         if hasattr(binary_file_stream, "name"):
             log.info("submitting file: fs.name: %s" % binary_file_stream.name)
             file_name = os.path.basename(binary_file_stream.name)
 
-        # header = {"Authorization": "Token %s" % self.api_token}
+        headers = None
+        if self.api_token:
+            headers = {"Authorization": "Token %s" % self.api_token}
+
         files = {"file": (file_name, open(file_name, 'rb'))} if file_name else {"file": (md5sum, binary_file_stream)}
 
-        response = self.session.post(request_url, files=files, verify=False)
+        response = self.session.post(request_url, files=files, headers=headers, verify=False)
 
         return response
