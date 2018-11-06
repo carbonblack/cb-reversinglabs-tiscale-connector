@@ -104,7 +104,7 @@ class ReversingLabsTiScaleConnector(DetonationDaemon):
     def get_metadata(self):
 
         return feed.generate_feed(self.name,
-                                  summary="ReversingLabs is the industry's leading static file analysis platform, providing access to the industry's largest private collection of file reputation data with over 7 billion malware and goodware samples.  ReversingLabs File Reputation classifies file samples and enriches threat intelligence provided by Carbon Black.  The ReversingLabs A1000 malware analysis workstation integration with Carbon Black provides pivots for hunting and investigation by SOC/Analyst teams with YARA-based rules matching.",
+                                  summary="The ReversingLabs TitaniumScale Appliance is powered by TitaniumCore, the malware analysis engine that performs automated static analysis using the Active File Decomposition technology.TitaniumCore unpacks and recursively analyzes files without executing them, and extracts internal threat indicators to classify files and determine their threat level. TitaniumCore is capable of identifying thousands of file format families. It recursively unpacks hundreds of file format families, and fully repairs extracted files to enable further analysis.",
                                   tech_data="A ReversingLabs private API key is required to use this feed. There are no requirements to share any data with Carbon Black or ReversingLabs to use this feed. However, binaries may be shared with ReversingLabs.",
                                   provider_url="https://reversinglabs.com",
                                   icon_path="/usr/share/cb/integrations/reversinglabs-tiscale/rl-titaniumscale.png",
